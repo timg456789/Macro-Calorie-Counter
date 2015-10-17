@@ -1,0 +1,10 @@
+branch-defaults:
+  master:
+    environment: null
+global:
+  application_name: macro-calorie-counter
+  default_ec2_keyname: Development
+  default_platform: Node.js
+  default_region: us-east-1
+  profile: eb-cli
+  sc: git
