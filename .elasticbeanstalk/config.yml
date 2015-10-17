@@ -1,6 +1,6 @@
 branch-defaults:
   master:
-    environment: null
+    environment: macro-calorie-counter-0
 global:
   application_name: macro-calorie-counter
   default_ec2_keyname: Development
