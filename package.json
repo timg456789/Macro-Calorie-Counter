@@ -1,0 +1,23 @@
+{
+  "name": "macro-calorie-counter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "aws-sdk": "^2.2.10"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timg456789/Macro-Calorie-Counter.git"
+  },
+  "author": "Timothy Gonzalez",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/timg456789/Macro-Calorie-Counter/issues"
+  },
+  "homepage": "https://github.com/timg456789/Macro-Calorie-Counter#readme"
+}
