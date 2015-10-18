@@ -1,7 +1,13 @@
 node_modules/
-.elasticbeanstalk/
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
+.elasticbeanstalk/
+
+# Elastic Beanstalk Files
+
+.elasticbeanstalk/*
+
+!.elasticbeanstalk/*.cfg.yml
+
 !.elasticbeanstalk/*.global.yml
 .idea/
+
+npm-debug.log
