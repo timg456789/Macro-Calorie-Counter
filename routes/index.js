@@ -1,3 +1,9 @@
-exports.index = function(req, res) {
-  res.render('food', { title: 'My Food Log' } );
-};
+var express = require('express');
+var router = express.Router();
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'My Food Log' });
+});
+
+module.exports = router;
