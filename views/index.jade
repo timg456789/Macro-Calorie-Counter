@@ -1,5 +1,31 @@
 extends layout
+block scripts
+    script(src='/controllers/index-controller.js')
 block content
-    .container
-        h1= title
-        p Welcome to #{title}
+    #add-food.container
+        form(class='form-horizontal')
+            .form-group
+                label(class='col-sm-1') Food
+                .col-sm-11
+                    input(type='text' class='form-control' placeholder='Food')
+            .form-group
+                label(class='col-sm-1') Servings
+                .col-sm-11
+                    input(type='text' class='form-control' placeholder='Servings')
+            .form-group
+                label(class='col-sm-1') Calories
+                .col-sm-11
+                    input(type='text' class='form-control' placeholder='Calories')
+            .form-group(class='form-inline')
+                label(class='col-sm-1') Macros
+                .col-sm-11
+                    input(type='text' class='form-control' placeholder='Carbs')
+                    input(type='text' class='form-control' placeholder='Fats')
+                    input(type='text' class='form-control' placeholder='Proteins')
+            .form-group
+                label(class='col-sm-2') Add to Templates
+                .col-sm-10
+                    input(type='checkbox')
+            .form-group.btn-toolbar
+                button(type='button' class='btn btn-primary save') Save
+                button(type='button' class='btn btn-default cancel') Cancel
