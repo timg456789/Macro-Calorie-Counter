@@ -1,9 +1,11 @@
 doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/libraries/bootstrap/css/bootstrap.css')
-    link(rel='stylesheet', href='/libraries/bootstrap/css/bootstrap-theme.css')
-    script(type='text/javascript' src='libraries/bootstrap/js/bootstrap.js')
-  body
+    head
+        title= title
+        link(rel='stylesheet', href='/libraries/bootstrap/css/bootstrap.css')
+        link(rel='stylesheet', href='/libraries/bootstrap/css/bootstrap-theme.css')
+        script(type='text/javascript' src='/libraries/jquery/jquery.js')
+        script(type='text/javascript' src='/libraries/bootstrap/js/bootstrap.js')
+        block scripts
+    body
     block content
