@@ -25,7 +25,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 
 app.get('/deploy', deploy.index);
-app.get('/deploy-db', deploy.deploy_db);
+app.get('/deploy-db', deploy.deploy_db_ui);
+app.post('/deploy-db', deploy.deploy_db_start);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

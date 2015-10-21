@@ -3,4 +3,7 @@ extends layout
 block content
   .container
     h1= title
-    .connection
+    .database
+        form(action='/deploy-db', method='post')
+            .form-group
+                button(class='start' type='submit') Deploy
