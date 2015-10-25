@@ -23,8 +23,12 @@ function getAwsConfig() {
 function DatabaseManager() {
 
     var AWS = require('aws-sdk');
-    var dynamodb = new AWS.DynamoDB();
-    var docClient = new AWS.DynamoDB.DocumentClient();
+    var config = {
+        region: 'us-east-1',
+        endpoint: 'http://localhost:8000'
+    };
+    var dynamodb = new AWS.DynamoDB(config);
+    var docClient = new AWS.DynamoDB.DocumentClient(config);
     var FOOD = 'Food';
     var PK = 'consumer';
 
