@@ -7,20 +7,11 @@ exports.deploy_db_ui = function(req, res) {
 };
 
 exports.deploy_db_start = function(req, res) {
-
-    var dbMgr = new DatabaseManager();
+    var dbMgr = new DatabaseManager(res);
     dbMgr.rebuild();
-
-
-    res.status(200);
-    res.render('deploy', { title: 'Deploy Resources' } );
 };
 
-function getAwsConfig() {
-
-}
-
-function DatabaseManager() {
+function DatabaseManager(res) {
 
     var AWS = require('aws-sdk');
     var config = {
@@ -47,6 +38,11 @@ function DatabaseManager() {
             WriteCapacityUnits: 1
         }
     };
+
+    function deployComplete() {
+        res.status(200);
+        res.render('deploy', { title: 'Deploy Resources' } );
+    }
 
     function createFoodModel(name) {
         return {
@@ -78,6 +74,7 @@ function DatabaseManager() {
                 console.log('Fail querying' + JSON.stringify(err));
             } else {
                 console.log(JSON.stringify(data));
+                deployComplete();
             }
         })
 
