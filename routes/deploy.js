@@ -11,6 +11,23 @@ exports.deploy_db_start = function(req, res) {
     dbMgr.rebuild();
 };
 
+function WebPing() {
+
+    var request = require('request');
+    var monitorUrl = 'http://requestb.in/xyzrbnxz';
+
+    this.ping = function (data) {
+
+        if (data) {
+            var encodedData = encodeURIComponent(data);
+            monitorUrl += '?' + encodedData;
+        }
+
+        request(monitorUrl);
+    }
+
+}
+
 function DatabaseManager(res) {
 
     var AWS = require('aws-sdk');
@@ -22,6 +39,7 @@ function DatabaseManager(res) {
     var docClient = new AWS.DynamoDB.DocumentClient(config);
     var FOOD = 'Food';
     var PK = 'consumer';
+    var webPing = new WebPing();
 
     var FOOD_CONFIG = {
         TableName : FOOD,
@@ -56,7 +74,7 @@ function DatabaseManager(res) {
     }
 
     function loadFood() {
-        console.log('loading food');
+        webPing.ping('loading food');
 
         var query = {
             TableName : FOOD,
@@ -71,9 +89,9 @@ function DatabaseManager(res) {
 
         docClient.query(query, function(err, data) {
             if (err) {
-                console.log('Fail querying' + JSON.stringify(err));
+                webPing.ping('Fail querying' + JSON.stringify(err));
             } else {
-                console.log(JSON.stringify(data));
+                webPing.ping(JSON.stringify(data));
                 deployComplete();
             }
         })
@@ -85,7 +103,7 @@ function DatabaseManager(res) {
 
         docClient.put(food, function(err, data) {
             if (err) {
-                console.log('Fail inserting: ' + err);
+                webPing.ping('Fail inserting: ' + err);
             } else {
                 loadFood();
             }
@@ -94,11 +112,12 @@ function DatabaseManager(res) {
 
     this.rebuild = function () {
 
+        webPing.ping('listing tables');
         dynamodb.listTables(function(err, data) {
             if (err) {
-                console.log("Error listing tables: ", err);
+                webPing.ping("Error listing tables: ", err);
             } else {
-
+                webPing.ping('checking if food table exists');
                 if (data.TableNames.indexOf('Food') > -1) {
 
                     var params = {
@@ -107,11 +126,11 @@ function DatabaseManager(res) {
 
                     dynamodb.deleteTable(params, function(err, data) {
                         if (err) {
-                            console.log('Error deleting table: ', err);
+                            webPing.ping('Error deleting table: ', err);
                         } else {
                             dynamodb.createTable(FOOD_CONFIG, function(err, data) {
                                 if (err) {
-                                    console.log('Error creating table: ' + err);
+                                    webPing.ping('Error creating table: ' + err);
                                 } else {
                                     insert();
                                 }
@@ -122,7 +141,7 @@ function DatabaseManager(res) {
                 } else {
                     dynamodb.createTable(FOOD_CONFIG, function(err, data) {
                         if (err) {
-                            console.log('Error creating table: ' + err);
+                            webPing.ping('Error creating table: ' + err);
                         } else {
                             insert();
                         }
