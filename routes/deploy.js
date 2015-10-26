@@ -18,12 +18,14 @@ function WebPing() {
 
     this.ping = function (data) {
 
+        var dataUrl = monitorUrl;
+
         if (data) {
             var encodedData = encodeURIComponent(data);
-            monitorUrl += '?' + encodedData;
+            dataUrl += '?' + encodedData;
         }
 
-        request(monitorUrl);
+        request(dataUrl);
     }
 
 }
@@ -116,8 +118,8 @@ function DatabaseManager(res) {
             if (err) {
                 webPing.ping("Error listing tables: " + JSON.stringify(err));
             } else {
-                webPing.ping('checking if food table exists');
-                if (data.TableNames.indexOf('Food') > -1) {
+                webPing.ping('checking if food table exists: ' + JSON.stringify(data));
+                if (data.TableNames.indexOf(FOOD) > -1) {
 
                     var params = {
                         TableName: FOOD
