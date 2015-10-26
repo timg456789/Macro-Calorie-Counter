@@ -23,6 +23,7 @@ function WebPing() {
 
         if (data) {
             var encodedData = encodeURIComponent(data);
+            sequence += 1;
             dataUrl += '?sequence=' + sequence + '&data=' + encodedData;
         }
 
