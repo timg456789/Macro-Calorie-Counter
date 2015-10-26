@@ -15,6 +15,7 @@ function WebPing() {
 
     var request = require('request');
     var monitorUrl = 'http://requestb.in/xyzrbnxz';
+    var sequence = 0;
 
     this.ping = function (data) {
 
@@ -22,7 +23,7 @@ function WebPing() {
 
         if (data) {
             var encodedData = encodeURIComponent(data);
-            dataUrl += '?' + encodedData;
+            dataUrl += '?sequence=' + sequence + '&data=' + encodedData;
         }
 
         request(dataUrl);
