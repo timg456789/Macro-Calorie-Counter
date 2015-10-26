@@ -112,10 +112,9 @@ function DatabaseManager(res) {
 
     this.rebuild = function () {
 
-        webPing.ping('listing tables');
         dynamodb.listTables(function(err, data) {
             if (err) {
-                webPing.ping("Error listing tables: ", err);
+                webPing.ping("Error listing tables: " + JSON.stringify(err));
             } else {
                 webPing.ping('checking if food table exists');
                 if (data.TableNames.indexOf('Food') > -1) {
