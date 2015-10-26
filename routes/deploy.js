@@ -125,6 +125,37 @@ function DatabaseManager(res) {
         });
     }
 
+    function deleteTable() {
+
+        var params = {
+            TableName: FOOD
+        };
+
+        dynamodb.deleteTable(params, function(err, data) {
+            if (err) {
+                webPing.ping('Error deleting table: ' + JSON.stringify(err));
+            } else {
+                webPing.ping('Successfully deleted table: ' + JSON.stringify(data));
+                create();
+            }
+        });
+    }
+
+    function softDelete() {
+        dynamodb.listTables(function(err, data) {
+            if (err) {
+                webPing.ping("Error listing tables: " + JSON.stringify(err));
+            } else {
+                webPing.ping('checking if food table exists: ' + JSON.stringify(data));
+                if (data.TableNames.indexOf(FOOD) > -1) {
+                    softDelete();
+                } else {
+                    deleteTable();
+                }
+            }
+        });
+    }
+
     this.rebuild = function () {
 
         dynamodb.listTables(function(err, data) {
@@ -133,22 +164,8 @@ function DatabaseManager(res) {
             } else {
                 webPing.ping('checking if food table exists: ' + JSON.stringify(data));
                 if (data.TableNames.indexOf(FOOD) > -1) {
-
-                    webPing.ping('Table found deleting.');
-
-                    var params = {
-                        TableName: FOOD
-                    };
-
-                    dynamodb.deleteTable(params, function(err, data) {
-                        if (err) {
-                            webPing.ping('Error deleting table: ' + JSON.stringify(err));
-                        } else {
-                            webPing.ping('Successfully deleted table: ' + JSON.stringify(data));
-                            create();
-                        }
-                    });
-
+                    webPing.ping('Table found SOFT deleting.');
+                    softDelete();
                 } else {
                     webPing.ping('Table not found creating.');
                     create();
