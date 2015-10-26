@@ -121,18 +121,21 @@ function DatabaseManager(res) {
                 webPing.ping('checking if food table exists: ' + JSON.stringify(data));
                 if (data.TableNames.indexOf(FOOD) > -1) {
 
+                    webPing.ping('found deleting');
+
                     var params = {
                         TableName: FOOD
                     };
 
                     dynamodb.deleteTable(params, function(err, data) {
                         if (err) {
-                            webPing.ping('Error deleting table: ', err);
+                            webPing.ping('Error deleting table: ' + JSON.stringify(err));
                         } else {
                             dynamodb.createTable(FOOD_CONFIG, function(err, data) {
                                 if (err) {
-                                    webPing.ping('Error creating table: ' + err);
+                                    webPing.ping('Error creating table: ' + JSON.stringify(err));
                                 } else {
+                                    webPing.ping('Successfully created table: ' + JSON.stringify(data));
                                     insert();
                                 }
                             });
@@ -140,6 +143,9 @@ function DatabaseManager(res) {
                     });
 
                 } else {
+
+                    webPing.ping('not found creating');
+
                     dynamodb.createTable(FOOD_CONFIG, function(err, data) {
                         if (err) {
                             webPing.ping('Error creating table: ' + err);
