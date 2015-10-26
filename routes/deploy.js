@@ -131,6 +131,7 @@ function DatabaseManager(res) {
                         if (err) {
                             webPing.ping('Error deleting table: ' + JSON.stringify(err));
                         } else {
+                            webPing.ping('Successfully deleted table: ' + JSON.stringify(data));
                             dynamodb.createTable(FOOD_CONFIG, function(err, data) {
                                 if (err) {
                                     webPing.ping('Error creating table: ' + JSON.stringify(err));
