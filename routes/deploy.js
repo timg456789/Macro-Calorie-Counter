@@ -32,8 +32,8 @@ function DatabaseManager(res) {
 
     var AWS = require('aws-sdk');
     var config = {
-        region: 'us-east-1',
-        endpoint: 'http://localhost:8000'
+        region: 'us-east-1'//,
+        //endpoint: 'http://localhost:8000'
     };
     var dynamodb = new AWS.DynamoDB(config);
     var docClient = new AWS.DynamoDB.DocumentClient(config);
