@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node ./bin/www"
   },
+  "license": "./LICENSE",
   "dependencies": {
     "aws-sdk": "^2.2.11",
     "body-parser": "~1.13.2",
