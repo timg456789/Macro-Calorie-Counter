@@ -6,7 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var deploy = require('./routes/deploy');
 
 var app = express();
 
@@ -23,11 +22,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-
-app.get('/deploy', deploy.index);
-app.get('/deploy-db', deploy.deploy_db_ui);
-app.post('/deploy-db', deploy.deploy_db_start);
-
 
 
 

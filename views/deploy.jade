@@ -1,9 +1,0 @@
-extends layout
-
-block content
-  .container
-    h1= title
-    .database
-        form(action='/deploy-db', method='post')
-            .form-group
-                button(class='start' type='submit') Deploy
